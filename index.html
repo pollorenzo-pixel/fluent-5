@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fluent 5</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b0b0f">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1a1a22, #0b0b0f);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .header {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.6;
+      margin-top: 6px;
+    }
+
+    .card {
+      margin-top: 40px;
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .day {
+      font-size: 14px;
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+
+    .mission {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .streak {
+      margin-top: 12px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .button {
+      margin-top: 30px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #000;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .button:active {
+      transform: scale(0.97);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .footer div {
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="title">Fluent 5</div>
+      <div class="subtitle">Speak English for 5 minutes every day</div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+      <div class="day" id="dayText">Day 1 of 90</div>
+      <div class="mission" id="missionText">
+        Talk about your day.  
+        What did you do? What are you planning next?
+      </div>
+      <div class="streak" id="streakText">🔥 0 day streak</div>
+
+      <div class="button" onclick="startPractice()">
+        Start 5-Minute Practice
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div onclick="openPhrases()">Phrases</div>
+      <div onclick="openProgress()">Progress</div>
+    </div>
+
+  </div>
+
+  <script>
+    // ====== BASIC STATE ======
+    const TOTAL_DAYS = 90;
+
+    function getDay() {
+      return localStorage.getItem("fluent5_day") || 1;
+    }
+
+    function getStreak() {
+      return localStorage.getItem("fluent5_streak") || 0;
+    }
+
+    function updateUI() {
+      document.getElementById("dayText").innerText = `Day ${getDay()} of ${TOTAL_DAYS}`;
+      document.getElementById("streakText").innerText = `🔥 ${getStreak()} day streak`;
+    }
+
+    updateUI();
+
+    // ====== NAVIGATION ======
+    function startPractice() {
+      window.location.href = "practice.html";
+    }
+
+    function openPhrases() {
+      alert("Phrase Bank coming soon");
+    }
+
+    function openProgress() {
+      alert("Progress screen coming soon");
+    }
+
+    // ====== PWA SERVICE WORKER ======
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+  </script>
+</body>
+</html>
